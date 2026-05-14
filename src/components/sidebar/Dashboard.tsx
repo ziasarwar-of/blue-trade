@@ -3,11 +3,10 @@ import TradingChart from "../tradingChart/TradingChart";
 import MarketWatchs from "../marketWatch/MarketWatchs";
 import AssetAllocation from "../assetsAllocation/AssetAllocation";
 import ConvertExchange from "../convertExchange/ConvertExchange";
-import TransactionHistory from "../transictionHistory/TransictionHistory";
+import TransactionHistory from "../transactionHistory/TransactionHistory";
 
 function Dashboard() {
   return (
-    
     <div className="flex-1 p-4 md:p-6 lg:p-8 overflow-auto ">
       <div className="space-y-4 md:space-y-6">
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 md:gap-6">
@@ -147,12 +146,11 @@ function Dashboard() {
         </div>
         <TradingChart />
         <MarketWatchs />
-          <AssetAllocation />
+        <AssetAllocation />
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <ConvertExchange />
-          <TransactionHistory/>
-          
+          <TransactionHistory />
         </div>
       </div>
     </div>
