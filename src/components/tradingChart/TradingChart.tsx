@@ -1,5 +1,6 @@
 "use client";
 
+import React, { useEffect, useState } from "react"; // Added hooks
 import {
   ResponsiveContainer,
   ComposedChart,
@@ -23,25 +24,25 @@ const data = [
 ];
 
 export default function TradingChart() {
+  // 1. Add a mounted state to prevent SSR dimension issues
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   return (
-    <div className="bg-[#0f1229] rounded-2xl p-4 md:p-6 border border-[rgba(59,130,246,0.1)] shadow-lg ">
+    <div className="bg-[#0f1229] rounded-2xl p-4 md:p-6 border border-[rgba(59,130,246,0.1)] shadow-lg">
       {/* Top Section */}
       <div className="flex flex-col md:flex-row md:items-center justify-between mb-6 gap-4">
         <div>
-          <h3 className="text-lg md:text-xl font-semibold text-white">
-            BTC/USDT
-          </h3>
-
+          <h3 className="text-lg md:text-xl font-semibold text-white">BTC/USDT</h3>
           <div className="flex items-center gap-4 mt-1">
-            <span className="text-xl md:text-2xl font-bold text-white">
-              $68,432.50
-            </span>
-
+            <span className="text-xl md:text-2xl font-bold text-white">$68,432.50</span>
             <span className="text-green-400 text-sm">+5.24%</span>
           </div>
         </div>
 
-        {/* Buttons */}
         <div className="flex gap-2 overflow-x-auto">
           {["1H", "4H", "1D", "1W", "1M"].map((item, index) => (
             <button
@@ -58,60 +59,58 @@ export default function TradingChart() {
         </div>
       </div>
 
-      {/* Chart */}
-      <div className="w-full h-75">
-        <ResponsiveContainer width="100%" height="100%">
-          <ComposedChart data={data}>
-            {/* Gradient */}
-            <defs>
-              <linearGradient id="blueGlow" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="50%" stopColor="#3b82f6" stopOpacity={0.3} />
-                <stop offset="95%" stopColor="#3b82f6" stopOpacity={0} />
-              </linearGradient>
-            </defs>
+      {/* 2. Changed h-75 to h-[300px] (standard Tailwind) */}
+      <div className="w-full h-[300px]">
+        {/* 3. Only render chart after mounting to avoid Build Warnings */}
+        {mounted ? (
+          <ResponsiveContainer width="100%" height="100%">
+            <ComposedChart data={data}>
+              <defs>
+                <linearGradient id="blueGlow" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="50%" stopColor="#3b82f6" stopOpacity={0.3} />
+                  <stop offset="95%" stopColor="#3b82f6" stopOpacity={0} />
+                </linearGradient>
+              </defs>
 
-            {/* Grid */}
-            <CartesianGrid
-              strokeDasharray="3 3"
-              stroke="rgba(59,130,246,0.1)"
-            />
+              <CartesianGrid strokeDasharray="3 3" stroke="rgba(59,130,246,0.1)" />
 
-            {/* Axis */}
-            <XAxis
-              dataKey="time"
-              stroke="#94a3b8"
-              tick={{ fill: "#94a3b8", fontSize: 12 }}
-            />
+              <XAxis
+                dataKey="time"
+                stroke="#94a3b8"
+                tick={{ fill: "#94a3b8", fontSize: 12 }}
+              />
 
-            <YAxis stroke="#94a3b8" tick={{ fill: "#94a3b8", fontSize: 12 }} />
+              <YAxis 
+                stroke="#94a3b8" 
+                tick={{ fill: "#94a3b8", fontSize: 12 }} 
+                domain={['auto', 'auto']} // Better for crypto prices
+              />
 
-            {/* Tooltip */}
-            <Tooltip
-              contentStyle={{
-                backgroundColor: "#0f1229",
-                border: "1px solid rgba(59,130,246,0.2)",
-                borderRadius: "8px",
-                color: "#fff",
-              }}
-            />
+              <Tooltip
+                contentStyle={{
+                  backgroundColor: "#0f1229",
+                  border: "1px solid rgba(59,130,246,0.2)",
+                  borderRadius: "8px",
+                  color: "#fff",
+                }}
+              />
 
-            {/* Volume Bars */}
-            <Bar
-              dataKey="volume"
-              fill="rgba(59,130,246,0.2)"
-              radius={[4, 4, 0, 0]}
-            />
+              <Bar dataKey="volume" fill="rgba(59,130,246,0.2)" radius={[4, 4, 0, 0]} />
 
-            {/* Price Area */}
-            <Area
-              type="monotone"
-              dataKey="price"
-              stroke="#3b82f6"
-              strokeWidth={3}
-              fill="url(#blueGlow)"
-            />
-          </ComposedChart>
-        </ResponsiveContainer>
+              <Area
+                type="monotone"
+                dataKey="price"
+                stroke="#3b82f6"
+                strokeWidth={3}
+                fill="url(#blueGlow)"
+              />
+            </ComposedChart>
+          </ResponsiveContainer>
+        ) : (
+          <div className="w-full h-full flex items-center justify-center text-gray-500">
+            Loading Chart...
+          </div>
+        )}
       </div>
     </div>
   );

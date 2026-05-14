@@ -1,8 +1,17 @@
 "use client";
-
+type StatusColor = "green" | "yellow" | "red";
+type Transaction = {
+  type: string;
+  time: string;
+  amount: string;
+  usd: string;
+  status: string;
+  statusColor: StatusColor;
+  icon: "down" | "up";
+};
 import { ArrowDownLeft, ArrowUpRight } from "lucide-react";
 
-const transactions = [
+const transactions: Transaction[] = [
   {
     type: "deposit BTC",
     time: "2 hours ago",
