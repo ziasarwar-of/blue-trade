@@ -62,7 +62,7 @@ const ConvertExchange = () => {
   const [fromCurrency, setFromCurrency] = useState("USD");
   const [toCurrency, setToCurrency] = useState("PKR");
 
-  const [result, setResult] = useState(null);
+  const [result, setResult] = useState<number | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -132,7 +132,10 @@ const ConvertExchange = () => {
           <input
             type="number"
             value={amount}
-            onChange={(e) => setAmount(e.target.value)}
+            onChange={(e) => {
+              const val = e.target.value;
+              setAmount(val === "" ? 0 : Number(val));
+            }}
             className="bg-transparent outline-none w-full text-white text-3xl font-bold"
           />
         </div>
