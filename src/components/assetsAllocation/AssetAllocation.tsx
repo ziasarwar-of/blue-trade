@@ -28,12 +28,12 @@ export default function AssetAllocation() {
       <div className="w-full h-[300px] min-w-0">
         {mounted ? (
           <ResponsiveContainer width="100%" height="100%">
-            <PieChart>
+            <PieChart margin={{ top: 10, bottom: 10 }}>
               <Pie
                 data={data}
                 dataKey="value"
                 cx="50%"
-                cy="40%"
+                cy="50%"
                 innerRadius={60}
                 outerRadius={90}
                 paddingAngle={3}
@@ -46,6 +46,8 @@ export default function AssetAllocation() {
               <Legend
                 verticalAlign="bottom"
                 align="center"
+                iconType="circle"
+                wrapperStyle={{ paddingTop: "20px" }}
                 formatter={(value: string, entry: any) => (
                   <span className="text-gray-300 text-sm">
                     {value} ({entry.payload.value}%)
