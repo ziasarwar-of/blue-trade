@@ -50,11 +50,11 @@ export default function Sidebar() {
           </Link>
 
           <Link
-            href="/transiction"
+            href="/transaction"
             onClick={() => setOpen(false)}
             className="text-gray-300 hover:text-white"
           >
-            Transiction
+            Transaction
           </Link>
           <Link
             href="/notification"
