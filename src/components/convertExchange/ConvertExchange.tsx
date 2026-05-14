@@ -3,7 +3,12 @@
 import { useState } from "react";
 import { ArrowUpDown } from "lucide-react";
 
-export const currencies = [
+interface Currency {
+  code: string;
+  symbol: string;
+  name: string;
+}
+export const currencies: Currency[] = [
   { code: "USD", symbol: "$", name: "US Dollar" },
   { code: "EUR", symbol: "€", name: "Euro" },
   { code: "GBP", symbol: "£", name: "British Pound" },
@@ -58,14 +63,12 @@ export const currencies = [
 ];
 
 const ConvertExchange = () => {
-  const [amount, setAmount] = useState(1);
-  const [fromCurrency, setFromCurrency] = useState("USD");
-  const [toCurrency, setToCurrency] = useState("PKR");
-
+  const [amount, setAmount] = useState<number>(1);
+  const [fromCurrency, setFromCurrency] = useState<string>("USD");
+  const [toCurrency, setToCurrency] = useState<string>("PKR");
   const [result, setResult] = useState<number | null>(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
-
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string>("");
   // Convert Currency
   const convertCurrency = async () => {
     try {
@@ -102,7 +105,7 @@ const ConvertExchange = () => {
   };
 
   // Get Symbol
-  const getSymbol = (currencyCode: any) => {
+  const getSymbol = (currencyCode: string) => {
     return (
       currencies.find((currency) => currency.code === currencyCode)?.symbol ||
       ""
