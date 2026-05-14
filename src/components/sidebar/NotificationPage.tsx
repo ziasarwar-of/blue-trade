@@ -2,7 +2,7 @@ import React from "react";
 
 const Notification = () => {
   return (
-    <div className="flex flex-col p-6 m-4 md:space-y-6 justify-center ">
+    <div className="flex flex-col p-6 m-4 space-y-4 md:space-y-6 justify-center ">
       <h2 className="text-gray-100 font-bold text-3xl">Notifications</h2>
       <div className="bg-[#0f1229] border border-slate-600 w-full rounded-2xl p-4 shadow-[6px_0_30px_rgba(59,130,246,0.2)]">
         <h3 className="text-gray-100 font-bold text-xl">BTC Price Alert</h3>
