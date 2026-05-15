@@ -1,6 +1,6 @@
-import Transactions from '@/src/components/transactionHistory/TransactionHistory'
+import TransactionHistory from '@/src/components/transactionHistory/TransactionHistory'
 const page = () => {
-  return <Transactions/>
+  return <TransactionHistory/>
 }
 
 export default page

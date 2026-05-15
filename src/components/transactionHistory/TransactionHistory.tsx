@@ -67,7 +67,7 @@ const statusStyles = {
 
 export default function TransactionHistory() {
   return (
-    <div className="bg-[#0f1229] rounded-2xl p-6 border border-blue-500/10 shadow-lg">
+    <div className="bg-[#0f1229] rounded-2xl p-6 mt-4 border border-blue-500/10 shadow-lg">
       {/* Heading */}
       <h3 className="text-lg font-semibold text-white mb-4">
         Transaction History
